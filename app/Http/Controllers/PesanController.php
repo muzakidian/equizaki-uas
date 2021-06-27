@@ -7,6 +7,7 @@ use App\User;
 use App\PesananDetail;
 use Auth;
 use Alert;
+use PDF;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -151,6 +152,8 @@ class PesanController extends Controller
         return redirect('history/'.$pesanan_id);
 
     }
+
+
 
     
 }

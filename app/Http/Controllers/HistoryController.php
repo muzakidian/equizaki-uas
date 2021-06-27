@@ -7,6 +7,7 @@ use App\User;
 use App\PesananDetail;
 use Auth;
 use Alert;
+use PDF;
 use Illuminate\Http\Request;
 
 class HistoryController extends Controller
@@ -23,6 +24,12 @@ class HistoryController extends Controller
     	return view('history.index', compact('pesanans'));
     }
 
+    public function cetak_pdf($pesanan_id){
+        $pesanan = Pesanan::find($pesanan_id);
+        $pdf= PDF::loadview('history.cetak', ['Pesanan' => $pesanan]);
+        return $pdf->stream();
+    }
+
     public function detail($id)
     {
     	$pesanan = Pesanan::where('id', $id)->first();
@@ -30,4 +37,10 @@ class HistoryController extends Controller
 
      	return view('history.detail', compact('pesanan','pesanan_details'));
     }
+
+    // public function cetak_pdf($id){
+    //     $pesanan = Pesanan::find($id);
+    //     $pdf = PDF::loadview('history.detail',['pesanan'=>$pesanan]);
+    //     return $pdf->stream();
+    // }
 }
